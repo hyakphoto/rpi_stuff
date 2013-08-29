@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4968bb4b-4741-406e-8f43-b588855ad991}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile />
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <ItemGroup>
+    <Compile Include="Adafruit_CharLCDPlate_IPclock_example.py" />
+    <Compile Include="InterruptTest.py" />
+    <Compile Include="InterruptTest2.py" />
+    <Compile Include="TempSensor.py" />
+    <Compile Include="TempSensorTest.py" />
+    <Compile Include="Test.py" />
+    <Compile Include="ptvsd\attach_server.py" />
+    <Compile Include="ptvsd\visualstudio_py_debugger.py" />
+    <Compile Include="ptvsd\visualstudio_py_repl.py" />
+    <Compile Include="ptvsd\visualstudio_py_util.py" />
+    <Compile Include="ptvsd\__init__.py" />
+    <Compile Include="ptvsd\__main__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ptvsd" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+</Project>
