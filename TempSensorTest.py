@@ -7,7 +7,7 @@ def main():
     # logging.disable(logging.CRITICAL)
 
     sensor = TempSensor(0x48)
-    sensor.get_temperature()
+    print str(sensor.get_temperature())
 
 if __name__ == "__main__":
     main()

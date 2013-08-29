@@ -8,8 +8,6 @@ class TempSensor:
 
     Class to read out an DS1624 temperature sensor with a given address.
 
-    Based on http://www.min.at/prinz/?x=entry:entry130204-184219
-    
     DS1624 data sheet: http://datasheets.maximintegrated.com/en/ds/DS1624.pdf
 
     Thomas Heuberger, August 2013
@@ -52,15 +50,17 @@ class TempSensor:
         """
         return self.bus.read_word_data(self.address, self.DS1624_READ_TEMP)        
     
-    def __convert_temp(self, raw):
+    def __convert_temp(self, raw):        
         """
         Converts the raw data to a decimal value.        
         """
+        logging.basicConfig(filename='debug.log', level=logging.DEBUG)
         # As the DS1624 is Big-endian and the Pi Little-endian, the byte order is reversed.
         temp_integer = raw & 0x00FF
         temp_fractional = ((raw & 0xFF00) >> 8) >> 3
 
         a, b = struct.unpack('bb', '{}{}'.format(chr(temp_integer), chr(temp_fractional)))
+        logging.debug('raw: ' + hex(raw) + ' result: ' + str(a + (0.03125 * b)))
         return a + (0.03125 * b)
 
     def run_test(self):
