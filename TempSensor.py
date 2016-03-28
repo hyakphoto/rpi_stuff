@@ -1,7 +1,6 @@
 import smbus
 import time
 import logging
-import struct
 
 class TempSensor:
     """
@@ -56,12 +55,12 @@ class TempSensor:
         """
         logging.basicConfig(filename='debug.log', level=logging.DEBUG)
         # As the DS1624 is Big-endian and the Pi Little-endian, the byte order is reversed.
+        # DS1624 also only uses 12 bits.
         temp_integer = raw & 0x00FF
-        temp_fractional = ((raw & 0xFF00) >> 8) >> 3
-
-        a, b = struct.unpack('bb', '{}{}'.format(chr(temp_integer), chr(temp_fractional)))
-        logging.debug('raw: ' + hex(raw) + ' result: ' + str(a + (0.03125 * b)))
-        return a + (0.03125 * b)
+        if temp_integer > 127:
+          temp_integer = temp_integer - 256  
+        temp_fractional = (raw >> 12) * 0.0625
+        return temp_integer + temp_fractional
 
     def run_test(self):
         logging.basicConfig(filename='debug.log', level=logging.DEBUG)
